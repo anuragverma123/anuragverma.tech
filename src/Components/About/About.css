@@ -1,0 +1,131 @@
+.about-left img {
+    margin-top: 20px;
+  width: 450px;        /* set fixed width */
+  height: 650px;       /* set fixed height */
+    /* makes it a perfect circle */
+  object-fit: cover;   /* keeps the image inside the circle without distortion */
+  border: 4px solid #100f10; /* optional border */
+  
+  border-radius: 50%;
+}
+
+.about{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+    gap:80px;
+    margin: 80px 170px;
+}
+
+.about-title{
+    
+    position: relative;
+    font-size: 26px;
+}
+about-title h1{
+    padding:0px 30px;
+    font-size:190px;
+    font-weight: 900;
+    
+}
+
+.about-title img{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: -40px;
+    left: -60px;
+    z-index: -1;
+    opacity: 0.5;
+    
+}
+.about-sections{
+    display: flex;
+    gap: 80px;
+    
+}
+
+.about-right{
+    display:flex;
+    flex-direction:column;
+    gap: 80px;
+    margin-top: 20px;
+}
+
+.about-para {
+   display:flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 22px;
+    font-weight:500;
+
+}
+.about-skills{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.about-skill{
+    display:flex;
+    gap:50px;
+    align-items: center;
+    transition: 0.3s;
+    
+}
+.about-skill p{
+    min-width:150px;
+    font-size: 20px;
+    font-weight: 500;
+    ;
+}
+
+.about-skill hr{
+    border: #100f10;
+    outline: none;
+    border: none;
+    height: 8px;
+    width: 50%;
+    background:linear-gradient(264deg,#DF8908 -5.09%,#B415FF 106.28%);
+
+
+}
+.about-achievments{
+    display: flex;
+    width:100%;
+    justify-content:space-around;
+    margin-bottom:80px;
+    gap: 40px;
+    margin-top: 40px;
+    
+}
+
+.about-achievment{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    transition: 0.5s;
+}
+
+.about-achievment h1{
+    font-size: 50px;
+    font-weight: 700;
+    background: linear-gradient(270deg,#DF8908 50.41%,#B415FF 90.25%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip:text;
+}
+.about-achievment p{
+    font-size: 20px;
+    font-weight: 500;
+    color: #555555;
+}   
+.about-skill:hover{
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+.about-achievment:hover{
+    transform: scale(1.09);
+    transition: 0.5s;
+}
