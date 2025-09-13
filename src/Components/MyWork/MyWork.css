@@ -76,6 +76,41 @@
 }
 
 
+/* ✅ Responsive (max-width: 768px) */
+@media (max-width: 768px) {
+  .mywork {
+    margin: 40px 20px;
+    gap: 40px;
+    align-items: start;
+  }
 
+  .mywork-title h1 {
+    font-size: 36px;
+    text-align: center;
+  }
+
+  .mywork-title img {
+    width: 100px;
+    height: 100px;
+    top: -20px;
+    left: -30px;
+  }
+
+  .mywork-container {
+    grid-template-columns: 1fr 1fr 1fr; /* stack images vertically */
+    gap: 20px;
+  }
+
+  .mywork-container img {
+    width: 100%;   /* full width */
+    height: auto;  /* keep aspect ratio */
+    max-width: 100%;
+  }
+
+  .mywork-showmore {
+    padding: 15px 30px;
+    font-size: 14px;
+  }
+}
 
 

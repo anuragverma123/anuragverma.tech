@@ -8,8 +8,32 @@ import git_icon from "../../assets/git_icon.png";
 import link_icon from "../../assets/link_icon.png";
 
 const Contact = () => {
+   const onSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", "e084c9a0-1344-4dc3-aa1e-e0a4eeea09cc");
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: json
+    }).then((res) => res.json());
+
+     if (res.success) 
+      { 
+        console.log("Success", res);
+       }
+
+};
   return (
-    <div className="contact-container">
+    <div id="contact" className="contact-container">
       <div className="contact-title">
         <h1>Get in Touch</h1>
         <img src={theme_pattern} alt="" />
@@ -71,7 +95,7 @@ const Contact = () => {
         </div>
 
         {/* Contact Form */}
-        <form className="contact-right">
+        <form onSubmit={onSubmit} className="contact-right">
           <label htmlFor="name">Your name</label>
           <input type="text" id="name" name="name" placeholder="Enter your name" />
 

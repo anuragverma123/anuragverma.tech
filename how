@@ -1,0 +1,19 @@
+[33mcommit bbd22b3667e482530d4cc9fc96f468b43c653bf8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: anurag verma <anuragverma626591@gamil.com>
+Date:   Sun Sep 7 20:56:47 2025 +0530
+
+    Your commit message here
+
+src/App.jsx
+src/Components/About/About.css
+src/Components/About/About.jsx
+src/Components/Contact/Contact.css
+src/Components/Contact/Contact.jsx
+src/Components/MyWork/MyWork.css
+src/Components/MyWork/MyWork.jsx
+src/Components/Navbar/Navbar.jsx
+src/Components/Services/Ser.css
+src/Components/Services/Ser.jsx
+src/assets/git_icon.png
+src/assets/link_icon.png
+src/assets/services_data.js
