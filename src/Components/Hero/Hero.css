@@ -8,7 +8,7 @@
   
 }
 .hero img {
-    margin-top: 120px;
+  margin-top: 20px;
   width: 250px;        /* set fixed width */
   height: 250px;       /* set fixed height */
   border-radius: 50%;  /* makes it a perfect circle */
@@ -39,10 +39,10 @@
 
 .hero-action{
     display:flex;
-    alighn-items:center;
+    align-items:center;
     gap:25px;
     font-size:16px ;
-    font-weigth:500;
+    font-weight:500;
     margin-bottom:40px;
     margin-top: 20px;
     

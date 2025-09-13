@@ -1,14 +1,25 @@
-.footer{
-    margin:50px 170px;
+.footer {
+    width: 100vw;               /* full viewport width */
+    background-color: black;    /* full black background */
+    padding: 30px 5%;           /* inner spacing (top/bottom 30px, sides 5%) */
     display: flex;
     flex-direction: column;
-    gap:30px;
+    gap: 30px;
+    box-sizing: border-box;     /* padding included in width */
+    margin: 0;                  /* no outside margin */
 }
+
+
 
 .footer-top{
     display: flex;
     justify-content:space-between ;
 
+}
+.footer-top-left img{
+  width: 25%;
+  height: 60%;
+  background-color: #32323B;
 }
 
 .footer-top-left p{
@@ -102,7 +113,7 @@
   }
 
   .footer-email-input {
-    padding: 15px 20px;
+   padding: 15px 20px;
     padding-right: 20px;
     gap: 10px;
   }
