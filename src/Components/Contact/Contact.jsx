@@ -1,212 +1,235 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Contact.css';
-import theme_pattern from "../../assets/theme_pattern.svg";
-import mail_icon from "../../assets/mail_icon.svg";
-import call_icon from "../../assets/call_icon.svg";
-import location_icon from "../../assets/location_icon.svg";
-import git_icon from "../../assets/git_icon.png";
-import link_icon from "../../assets/link_icon.png";
 
 const Contact = () => {
-   const onSubmit = async (event) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('');
+  const [focusedField, setFocusedField] = useState('');
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const onSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    setIsSubmitting(true);
+    setSubmitStatus('');
 
-    formData.append("access_key", "e084c9a0-1344-4dc3-aa1e-e0a4eeea09cc");
+    const payload = {
+      access_key: "e084c9a0-1344-4dc3-aa1e-e0a4eeea09cc",
+      name: formData.name,
+      email: formData.email,
+      message: formData.message
+    };
 
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify(payload)
+      }).then((res) => res.json());
 
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: json
-    }).then((res) => res.json());
+      if (res.success) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setSubmitStatus(''), 3000);
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-     if (res.success) 
-      { 
-        console.log("Success", res);
-       }
+  const contactDetails = [
+    {
+      icon: "📧",
+      text: "anuragverma25840@gmail.com",
+       link: null,
+      delay: "0.1s"
+    },
+    {
+      icon: "📱",
+      text: "+91 7806008073",
+        link: null,
+      
+      delay: "0.2s"
+    },
+    {
+      icon: "📍",
+      text: "Madhya Pradesh, Bhopal, India",
+      link: null,
+      delay: "0.3s"
+    },
+    {
+      icon: "💻",
+      text: "GitHub",
+      link: "https://github.com/anuragverma123",
+      delay: "0.4s"
+    },
+    {
+      icon: "💼",
+      text: "LinkedIn",
+      link: "https://www.linkedin.com/in/anurag-verma-661052296",
+      delay: "0.5s"
+    }
+  ];
 
-};
   return (
     <div id="contact" className="contact-container">
-      <div className="contact-title">
-        <h1>Get in Touch</h1>
-        <img src={theme_pattern} alt="" />
+      <div className="background-shapes">
+        <div className="shape shape1"></div>
+        <div className="shape shape2"></div>
+        <div className="shape shape3"></div>
+        <div className="shape shape4"></div>
       </div>
 
-      <div className="contact-section">
-        <div className="contact-left">
-          <h1>Let's talk</h1>
-          <p>
-            I am currently open to new opportunities and collaborations. Whether
-            you have a project in mind, a question, or just want to say hello,
-            feel free to reach out. I look forward to connecting with you!
-          </p>
-
-          <div className="contact-details">
-
-            <div className="contact-detail1">
-              <img src={mail_icon} alt="mail" />
-              <p>anuragverma25840@gmail.com</p>
-            </div>
-
-            <div className="contact-detail1">
-              <img src={call_icon} alt="phone" />
-              <p>+91 7806008073</p>
-            </div>
-
-            <div className="contact-detail1">
-              <img src={location_icon} alt="location" />
-              <p>Madhya Pradesh, Bhopal, India</p>
-            </div>
-
-            {/* GitHub */}
-            <div className="contact-detail1">
-              <img src={git_icon} alt="github"width="50" height="50" text-decoration="none"/>
-              
-              <a
-                href="https://github.com/6265annu"
-                target="_blank"
-                rel="noopener noreferrer"
-              ><p>github</p>
-                
-              </a>
-            </div>
-
-            {/* LinkedIn */}
-            <div className="contact-detail1">
-              <img src={link_icon} alt="linkedin"width="50" height="50" text-underline="none"/>
-              <a
-                href="https://www.linkedin.com/in/anurag-verma-661052296"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <p>
-                linkedin</p>
-              </a>
-            </div>
-
-          </div>
+      <div className="contact-content">
+        <div className="contact-header">
+          <h1 className="contact-title">Get in Touch</h1>
+          <div className="title-underline"></div>
+          <p className="contact-subtitle">Let's create something amazing together</p>
         </div>
 
-        {/* Contact Form */}
-        <form onSubmit={onSubmit} className="contact-right">
-          <label htmlFor="name">Your name</label>
-          <input type="text" id="name" name="name" placeholder="Enter your name" />
+        <div className="contact-section">
+          <div className="left-section">
+            <div className="left-content">
+              <h2 className="left-title">Let's Talk</h2>
+              <p className="left-description">
+                I am currently open to new opportunities and collaborations. Whether
+                you have a project in mind, a question, or just want to say hello,
+                feel free to reach out. I look forward to connecting with you!
+              </p>
 
-          <label htmlFor="email">Your email</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email" />
+              <div className="details-container">
+                {contactDetails.map((detail, index) => (
+                  <div
+                    key={index}
+                    className="detail-item"
+                    style={{ animationDelay: detail.delay }}
+                  >
+                    <div className="icon-wrapper">
+                      <span className="detail-icon">{detail.icon}</span>
+                    </div>
+                    {detail.link ? (
+                      <a
+                        href={detail.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="detail-link"
+                      >
+                        {detail.text}
+                      </a>
+                    ) : (
+                      <span className="detail-text">{detail.text}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
 
-          <label htmlFor="message">Write your message here</label>
-          <textarea name="message" rows="8" placeholder="Enter your message"></textarea>
+          <div className="right-section">
+            <div className="form-group">
+              <label
+                className={`form-label ${focusedField === 'name' ? 'label-focused' : ''}`}
+              >
+                Your Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                onFocus={() => setFocusedField('name')}
+                onBlur={() => setFocusedField('')}
+                placeholder="Enter your name"
+                className={`form-input ${focusedField === 'name' ? 'input-focused' : ''}`}
+              />
+            </div>
 
-          <button className="contact-submit" type="submit">
-            Submit now
-          </button>
-        </form>
+            <div className="form-group">
+              <label
+                className={`form-label ${focusedField === 'email' ? 'label-focused' : ''}`}
+              >
+                Your Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                onFocus={() => setFocusedField('email')}
+                onBlur={() => setFocusedField('')}
+                placeholder="Enter your email"
+                className={`form-input ${focusedField === 'email' ? 'input-focused' : ''}`}
+              />
+            </div>
+
+            <div className="form-group">
+              <label
+                className={`form-label ${focusedField === 'message' ? 'label-focused' : ''}`}
+              >
+                Your Message
+              </label>
+              <textarea
+                name="message"
+                rows="6"
+                value={formData.message}
+                onChange={handleChange}
+                onFocus={() => setFocusedField('message')}
+                onBlur={() => setFocusedField('')}
+                placeholder="Write your message here..."
+                className={`form-input form-textarea ${focusedField === 'message' ? 'input-focused' : ''}`}
+              ></textarea>
+            </div>
+
+            <button
+              onClick={onSubmit}
+              disabled={isSubmitting}
+              className={`submit-button ${isSubmitting ? 'submit-button-disabled' : ''}`}
+            >
+              {isSubmitting ? (
+                <span className="button-content">
+                  <span className="spinner"></span>
+                  Sending...
+                </span>
+              ) : (
+                <span className="button-content">
+                  Send Message
+                  <span className="arrow">→</span>
+                </span>
+              )}
+            </button>
+
+            {submitStatus === 'success' && (
+              <div className="status-message success-message">
+                ✓ Message sent successfully!
+              </div>
+            )}
+            {submitStatus === 'error' && (
+              <div className="status-message error-message">
+                ✗ Failed to send. Please try again.
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Contact;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*port React from 'react';
-import './Contact.css';
-import theme_pattern from "../../assets/theme_pattern.svg";
-import mail_icon from "../../assets/mail_icon.svg";
-import call_icon from "../../assets/call_icon.svg";
-import location_icon from "../../assets/location_icon.svg";
-import git_icon from "../../assets/git_icon.png";
-import link_icon from "../../assets/link_icon.png";
-                    
-
-
-const Contact=()=>{
-    return(
-        <div className="contact-container">
-            <div className="contact-title">
-                <h1>Get in Touch</h1>
-                <img src={theme_pattern} alt=""/>
-            </div>
-            <div className="contact-section">
-                <div className="contact-left">
-                    <h1>Let's talk</h1>
-                     <p>I am currently open to new opportunities and collaborations. Whether you have a project in mind, a question, or just want to say hello, feel free to reach out. I look forward to connecting with you!</p>
-               <div className="contact-details">
-
-
-                <div className="contact-detail1">
-                    <img src={mail_icon} alt=""/> <p>anuragverma25840@gmail.com</p>
-                </div>
-
-
-                 <div className="contact-detail1">
-                    <img src={call_icon} alt=""/> <p>+91 7806008073</p>
-                 </div>
-
-
-                 
-                   <div className="contact-detail1">
-                    <img src={location_icon} alt=""/> <p>Madhya pradesh, Bhopal,India </p>
-                  </div>
-
-
-                   <div className="contact-detail1">
-                    <img src={git_icon} alt=""/> <p>github.com/anuragverma25840</p>
-                  </div>
-
-                   
-                     <div className="contact-detail1">
-                    <img src={link_icon} alt=""/> <p>linkedin.com/in/anurag-verma-25840</p>
-                  </div>
-
-                  </div>
-               </div>
-                </div>
-                <form  className="contact-right">
-                    <label  htmlFor="name">Your name   </label>
-                    <input type="text" id="name" name="name" placeholder= "Enter your name "   />
-                    <label  htmlFor="email">Your email   </label>
-                    <input type="email" id="email" name="email" placeholder= "Enter your email "   />
-                    <label  htmlFor="message">Write your message here   </label>
-                    <textarea  name="message"rows ="8"   placeholder="Enter youe message"   ></textarea>
-                    <button className='contact-submit' type="submit">Submit now </button>
-                </form>
-
-            </div>
-
-            </div>
-    )
-
-}
-
-export default Contact; */
